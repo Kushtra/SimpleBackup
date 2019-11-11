@@ -21,15 +21,15 @@ public class Interface {
 	private final String destination = System.getProperty("user.home") + "\\AppData\\Roaming\\SimpleBackup\\Backup";
 	
 	private boolean type;
-	private final double VERSION = 1.0;
+	private final double VERSION = 1.2;
 	private final String TITLE = "Simple Backup "+VERSION;
-	private String path;
+	private String source;
 	
 	private FileSystem fs;
 	private Backup bu;
 	private JFrame frame;
 	private JPanel panel;
-	private JButton ff = new JButton("Folder");
+	private JButton ff = new JButton("");
 	private JButton save = new JButton("Backup");
 	private JButton find = new JButton("Select");
 	private JButton open = new JButton("Open");
@@ -88,10 +88,10 @@ public class Interface {
 	}
 	
 	private void backup() {
-		if(path == null) {
+		if(source == null) {
 			JOptionPane.showMessageDialog(null, "Please select a file first!");
 		} else {
-			JOptionPane.showMessageDialog(null, bu.backup(path, destination));
+			JOptionPane.showMessageDialog(null, bu.backup(source, destination));
 		}
 	}
 	
@@ -101,26 +101,34 @@ public class Interface {
 	
 	private void initLabel() {
 		if(fs.saved()) {
+			type = fs.getType();
 			if(!type) {
 				String savedFolder = fs.getSavedFolder();
-				path = savedFolder;
+				source = savedFolder;
 				label.setText(savedFolder);
+				ff.setText("Folder");
 			} else {
 				String savedFile = fs.getSavedFile();
-				path = savedFile;
+				source = savedFile;
 				label.setText(savedFile);
+				ff.setText("File");
 			}
 		}
 	}
 	
 	private void updateLabelAndButton() {
 		if(!type) {
-			label.setText(fs.getSavedFolder());
+			String saved = fs.getSavedFolder();
+			source = saved;
+			label.setText(saved);
 			ff.setText("Folder");
 		} else {
+			String saved = fs.getSavedFile();
+			source = saved;
 			label.setText(fs.getSavedFile());
 			ff.setText(" File ");
 		}
+		fs.setLastSaved(type);
 	}
 	
 	private String chooseFile() {
@@ -146,7 +154,7 @@ public class Interface {
 			} else {
 				fs.setLastSavedFile(newString);
 			}
-			path = newString;
+			source = newString;
 			label.setText(newString);
 		}
 	}
