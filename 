@@ -1,0 +1,19 @@
+Changes in description
+
+Added save for last kind of file to backup
+Added feature where backup is zipped file
+New version is 1.2
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is up to date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   bin/bzg/arixs/simplebackup/ui/Interface.class
+#	modified:   bin/bzg/arixs/simplebackup/utils/Backup.class
+#	modified:   bin/bzg/arixs/simplebackup/utils/FileSystem.class
+#	modified:   src/bzg/arixs/simplebackup/ui/Interface.java
+#	modified:   src/bzg/arixs/simplebackup/utils/Backup.java
+#	modified:   src/bzg/arixs/simplebackup/utils/FileSystem.java
+#

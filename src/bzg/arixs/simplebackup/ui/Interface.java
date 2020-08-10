@@ -21,7 +21,7 @@ public class Interface {
 	private final String destination = System.getProperty("user.home") + "\\AppData\\Roaming\\SimpleBackup\\Backup";
 	
 	private boolean type;
-	private final double VERSION = 1.2;
+	private final double VERSION = 1.3;
 	private final String TITLE = "Simple Backup "+VERSION;
 	private String source;
 	
@@ -48,7 +48,7 @@ public class Interface {
 		panel.setBackground(new Color(128, 64, 255));
 		
 		frame = new JFrame(TITLE);
-		frame.setSize(360, 86);
+		frame.setSize(390, 90);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +91,10 @@ public class Interface {
 		if(source == null) {
 			JOptionPane.showMessageDialog(null, "Please select a file first!");
 		} else {
+			label.setText("Zipping...");
+			frame.update(frame.getGraphics());
 			JOptionPane.showMessageDialog(null, bu.backup(source, destination));
+			initLabel();
 		}
 	}
 	
@@ -101,8 +104,7 @@ public class Interface {
 	
 	private void initLabel() {
 		if(fs.saved()) {
-			type = fs.getType();
-			if(!type) {
+			if(!fs.getType()) {
 				String savedFolder = fs.getSavedFolder();
 				source = savedFolder;
 				label.setText(savedFolder);
@@ -125,7 +127,7 @@ public class Interface {
 		} else {
 			String saved = fs.getSavedFile();
 			source = saved;
-			label.setText(fs.getSavedFile());
+			label.setText(saved);
 			ff.setText(" File ");
 		}
 		fs.setLastSaved(type);
